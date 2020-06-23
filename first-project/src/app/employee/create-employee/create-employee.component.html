@@ -8,8 +8,9 @@
             <div class="form-group row">
                 <label for="fullName" class="col-sm-2 col-form-label control-label">Full Name</label>
                 <div class="col-sm-10">
-                    <input id="fullName" formControlName="fullName" [ngClass]="{'is-invalid' : employeeForm.get('fullName').invalid && employeeForm.get('fullName').touched }" type="text" class="form-control" placeholder="Full Name" required>
-                    <span *ngIf="fullNameLength>0" class="text-primary"> (Your Current full name legnth
+                    <input id="fullName" formControlName="fullName" (blur)="logValidationErrors()" [ngClass]="{'is-invalid' : formError.fullName }" type="text" class="form-control" placeholder="Full Name" required>
+                    <!-- [ngClass]="{'is-invalid' : employeeForm.get('fullName').invalid && employeeForm.get('fullName').touched }" <= bind with input field
+                        <span *ngIf="fullNameLength>0" class="text-primary"> (Your Current full name legnth
             is
             {{fullNameLength}})</span>
                     <span *ngIf="employeeForm.get('fullName').invalid && employeeForm.get('fullName').touched" class="invalid-feedback">
@@ -18,17 +19,50 @@
               employeeForm.get('fullName').errors.maxlength">
               The full name must be greate then 2 character and less than 20 character.
             </div>
-          </span>
+          </span> -->
+
+                    <span class="invalid-feedback">{{formError.fullName}}</span>
                 </div>
             </div>
+
+            <div class="form-group row ">
+                <label for="contact" class="col-sm-2 col-form-label">Contact preference</label>
+                <div class="col-sm-10  form-inline ">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input " formControlName="contact" (click)="onContactPreferenceChange('email')" type="radio" name="contact" id="email" value="email">
+                        <label class="form-check-label" for="email">Email</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" formControlName="contact" (click)="onContactPreferenceChange('phone')" type="radio" name="contact" id="phone" value="phone">
+                        <label class="form-check-label" for="email">Phone</label>
+                    </div>
+                </div>
+
+            </div>
+
             <div class=" form-group row">
                 <label for="email" class="col-sm-2 col-form-label">Email</label>
                 <div class="col-sm-10">
-                    <input formControlName="email" [ngClass]="{'is-invalid' : employeeForm.get('email').invalid && employeeForm.get('email').touched}" type="email" class="form-control" id="email" placeholder="Email" required>
-                    <span class="invalid-feedback">
+                    <input formControlName="email" (blur)="logValidationErrors()" [ngClass]="{'is-invalid' : formError.email }" type="email" class="form-control" id="email" placeholder="Email" required>
+                    <!--[ngClass]="{'is-invalid' : employeeForm.get('email').invalid && employeeForm.get('email').touched}"<= bind it with inputi field
+                         <span class="invalid-feedback">
             <div>Email is required.</div>
             <div>Email pattren is not vaild!</div>
-          </span>
+          </span> -->
+                    <span class="invalid-feedback">{{formError.email}}</span>
+                </div>
+            </div>
+
+            <div class=" form-group row">
+                <label for="phone" class="col-sm-2 col-form-label">Phone</label>
+                <div class="col-sm-10">
+                    <input formControlName="phone" [ngClass]="{'is-invalid' : formError.phone }" (blur)="logValidationErrors()" type="text" class="form-control" id="phone" placeholder="Phone Number">
+                    <!--[ngClass]="{'is-invalid' : employeeForm.get('email').invalid && employeeForm.get('email').touched}"<= bind it with inputi field
+                                     <span class="invalid-feedback">
+                        <div>Email is required.</div>
+                        <div>Email pattren is not vaild!</div>
+                      </span> -->
+                    <span class="invalid-feedback" *ngIf="formError.phone">{{formError.phone}}</span>
                 </div>
             </div>
 
@@ -37,18 +71,20 @@
                     <label for="skillName" class="col-sm-2 col-form-label">Skill Name</label>
                     <div class="col-sm-10  form-inline">
                         <div class="mr-2 ">
-                            <input formControlName="skillName" type="text" class="skillName" id="skillName" placeholder="skillName" required>
+                            <input formControlName="skillName" (blur)="logValidationErrors()" [ngClass]="{'is-invalid' : formError.skillName }" type="text" class="form-control" id="skillName" placeholder="skillName" required>
+                            <span class="invalid-feedback">{{formError.skillName}}</span>
                         </div>
                         <div class="mr-2 ">
-                            <input formControlName="exprienceInYears" type="text" class="form-control" id="proficiencyInYears" placeholder="Exprience In Years" required>
+                            <input formControlName="exprienceInYears" (blur)="logValidationErrors()" [ngClass]="{'is-invalid' : formError.exprienceInYears }" type="text" class="form-control" id="proficiencyInYears" placeholder="Exprience In Years" required>
+                            <span class="invalid-feedback">{{formError.exprienceInYears}}</span>
                         </div>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label for="email" class="col-sm-2 col-form-label">Proficiency</label>
-                    <div class="col-sm-10  form-inline">
+                <div class="form-group row ">
+                    <label for="proficiency" class="col-sm-2 col-form-label">Proficiency</label>
+                    <div class="col-sm-10  form-inline " (blur)="logValidationErrors()" [ngClass]="{'is-invalid' : formError.proficiency }">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" formControlName="proficiency" type="radio" name="proficiency" id="biginer" value="biginer">
+                            <input class="form-check-input " formControlName="proficiency" type="radio" name="proficiency" id="biginer" value="biginer">
                             <label class="form-check-label" for="biginer">Biginer</label>
                         </div>
                         <div class="form-check form-check-inline">
@@ -60,6 +96,7 @@
                             <label class="form-check-label" for="advance">Advance </label>
                         </div>
                     </div>
+                    <span class="invalid-feedback offset-sm-2 pl-3">{{formError.proficiency}}</span>
                 </div>
             </div>
 
