@@ -1,0 +1,39 @@
+{
+    "employees": [{
+            "id": 1,
+            "fullName": "Mark",
+            "contact": "email",
+            "email": "mark@custom.com",
+            "phone": "12345678901",
+            "skills": [{
+                    "skillName": "C#",
+                    "exprienceInYears": 2,
+                    "proficiency": "beginner"
+                },
+                {
+                    "skillName": "C",
+                    "exprienceInYears": 4,
+                    "proficiency": "advance"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "fullName": "Mark2",
+            "contact": "email",
+            "email": "mark2@custom.com",
+            "phone": "12345678901",
+            "skills": [{
+                    "skillName": "java",
+                    "exprienceInYears": 2,
+                    "proficiency": "beginner"
+                },
+                {
+                    "skillName": "C",
+                    "exprienceInYears": 2,
+                    "proficiency": "advance"
+                }
+            ]
+        }
+    ]
+}

@@ -4,12 +4,21 @@
     </div>
     <div class="card-body">
         <form (ngSubmit)="onSubmit()" [formGroup]="employeeForm">
-
             <div class="form-group row">
-                <label for="fullName" class="col-sm-2 col-form-label control-label">Full Name</label>
-                <div class="col-sm-10">
-                    <input id="fullName" formControlName="fullName" (blur)="logValidationErrors()" [ngClass]="{'is-invalid' : formError.fullName }" type="text" class="form-control" placeholder="Full Name" required>
-                    <!-- [ngClass]="{'is-invalid' : employeeForm.get('fullName').invalid && employeeForm.get('fullName').touched }" <= bind with input field
+                <label for="fullName" class="col-sm-2 col-form-label control-label">Full Name</label
+        >
+        <div class="col-sm-10">
+          <input
+            id="fullName"
+            formControlName="fullName"
+            (blur)="logValidationErrors()"
+            [ngClass]="{ 'is-invalid': formError.fullName }"
+            type="text"
+            class="form-control"
+            placeholder="Full Name"
+            required
+          />
+          <!-- [ngClass]="{'is-invalid' : employeeForm.get('fullName').invalid && employeeForm.get('fullName').touched }" <= bind with input field
                         <span *ngIf="fullNameLength>0" class="text-primary"> (Your Current full name legnth
             is
             {{fullNameLength}})</span>
@@ -21,148 +30,276 @@
             </div>
           </span> -->
 
-                    <span class="invalid-feedback">{{formError.fullName}}</span>
-                </div>
+          <span class="invalid-feedback">{{ formError.fullName }}</span>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="contact" class="col-sm-2 col-form-label"
+          >Contact preference</label
+        >
+        <div class="col-sm-10 form-inline">
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              formControlName="contact"
+              (click)="onContactPreferenceChange('email')"
+              type="radio"
+              name="contact"
+              id="email"
+              value="email"
+            />
+            <label class="form-check-label" for="email">Email</label>
             </div>
-
-            <div class="form-group row ">
-                <label for="contact" class="col-sm-2 col-form-label">Contact preference</label>
-                <div class="col-sm-10  form-inline ">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input " formControlName="contact" (click)="onContactPreferenceChange('email')" type="radio" name="contact" id="email" value="email">
-                        <label class="form-check-label" for="email">Email</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" formControlName="contact" (click)="onContactPreferenceChange('phone')" type="radio" name="contact" id="phone" value="phone">
-                        <label class="form-check-label" for="email">Phone</label>
-                    </div>
-                </div>
-
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" formControlName="contact" (click)="onContactPreferenceChange('phone')" type="radio" name="contact" id="phone" value="phone" />
+                <label class="form-check-label" for="email">Phone</label>
             </div>
+    </div>
+</div>
 
-            <div formGroupName="emailGroup">
-                <div class=" form-group row">
-                    <label for="email" class="col-sm-2 col-form-label">Email</label>
-                    <div class="col-sm-10">
-                        <input formControlName="email" (blur)="logValidationErrors()" [ngClass]="{'is-invalid' : formError.email}" type="email" class="form-control" id="email" placeholder="Email">
-                        <!--[ngClass]="{'is-invalid' : employeeForm.get('email').invalid && employeeForm.get('email').touched}"<= bind it with inputi field
+<div formGroupName="emailGroup">
+    <div class="form-group row">
+        <label for="email" class="col-sm-2 col-form-label">Email</label>
+        <div class="col-sm-10">
+            <input formControlName="email" (blur)="logValidationErrors()" [ngClass]="{ 'is-invalid': formError.email }" type="email" class="form-control" id="email" placeholder="Email" />
+            <!--[ngClass]="{'is-invalid' : employeeForm.get('email').invalid && employeeForm.get('email').touched}"<= bind it with inputi field
                                      <span class="invalid-feedback">
                         <div>Email is required.</div>
                         <div>Email pattren is not vaild!</div>
                       </span> -->
-                        <span class="invalid-feedback">{{formError.email}}</span>
-                    </div>
-                </div>
-                <div class=" form-group row">
-                    <label for="confirmEmail" class="col-sm-2 col-form-label">Confirm Email</label>
-                    <div class="col-sm-10">
-                        <input formControlName="confirmEmail" (blur)="logValidationErrors()" [ngClass]="{'is-invalid' : formError.confirmEmail || formError.emailGroup}" type="email" class="form-control" id="confirmEmail" placeholder="Confirm Email" required>
-                        <span class="invalid-feedback" *ngIf='formError.confirmEmail||formError.emailGroup'>{{formError.confirmEmail ? formError.confirmEmail : formError.emailGroup}}</span>
-                    </div>
-                </div>
-            </div>
+            <span class="invalid-feedback">{{ formError.email }}</span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="confirmEmail" class="col-sm-2 col-form-label">Confirm Email</label
+          >
+          <div class="col-sm-10">
+            <input
+              formControlName="confirmEmail"
+              (blur)="logValidationErrors()"
+              [ngClass]="{
+                'is-invalid': formError.confirmEmail || formError.emailGroup
+              }"
+              type="email"
+              class="form-control"
+              id="confirmEmail"
+              placeholder="Confirm Email"
+              required
+            />
+            <span
+              class="invalid-feedback"
+              *ngIf="formError.confirmEmail || formError.emailGroup"
+              >{{
+                formError.confirmEmail
+                  ? formError.confirmEmail
+                  : formError.emailGroup
+              }}</span
+            >
+          </div>
+        </div>
+      </div>
 
-            <div class=" form-group row">
-                <label for="phone" class="col-sm-2 col-form-label">Phone</label>
-                <div class="col-sm-10">
-                    <input formControlName="phone" [ngClass]="{'is-invalid' : formError.phone }" (blur)="logValidationErrors()" type="text" class="form-control" id="phone" placeholder="Phone Number">
-                    <!--[ngClass]="{'is-invalid' : employeeForm.get('email').invalid && employeeForm.get('email').touched}"<= bind it with inputi field
+      <div class="form-group row">
+        <label for="phone" class="col-sm-2 col-form-label">Phone</label>
+        <div class="col-sm-10">
+            <input formControlName="phone" [ngClass]="{ 'is-invalid': formError.phone }" (blur)="logValidationErrors()" type="text" class="form-control" id="phone" placeholder="Phone Number" />
+            <!--[ngClass]="{'is-invalid' : employeeForm.get('email').invalid && employeeForm.get('email').touched}"<= bind it with inputi field
                                      <span class="invalid-feedback">
                         <div>Email is required.</div>
                         <div>Email pattren is not vaild!</div>
                       </span> -->
-                    <span class="invalid-feedback" *ngIf="formError.phone">{{formError.phone}}</span>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <div class="col-sm-10 offset-sm-2">
-                    <button type="button" (click)='addskillButtonClick()' class="btn btn-primary ">Add Skill</button>
-                </div>
-            </div>
-
-            <div formArrayName="skills" *ngFor="let skill of skillArray; let i = index">
-                <div [formGroupName]="i" class="col-sm-10 offset-sm-2">
-                    <div class="form-group row">
-                        <label [attr.for]="'skillName'+i" class="col-sm-2 col-form-label">Skill</label>
-
-                        <div class=" col-sm-3 mr-2 ">
-                            <input formControlName="skillName" [ngClass]="{'is-invalid' : skill.get('skillName').invalid && skill.get('skillName').touched }" type="text" class="form-control" [id]="'skillName'+i" placeholder="skillName" required>
-                            <span class="invalid-feedback" *ngIf="skill.get('skillName').errors?.required && skill.get('skillName').touched"> Required skill name.</span>
-                        </div>
-                        <label [attr.for]="'exprienceInYears'+i" class="col-sm-2 col-form-label">Experience</label>
-                        <div class=" col-sm-3 mr-2 ">
-                            <input formControlName="exprienceInYears" [ngClass]="{'is-invalid' : skill.get('exprienceInYears').invalid && skill.get('exprienceInYears').touched }" type="text" class="form-control" [id]="'exprienceInYears'+i" placeholder="Exprience In Years" required>
-                            <span class="invalid-feedback " *ngIf="skill.get('exprienceInYears').errors?.required && skill.get('exprienceInYears').touched">Required Exprience.</span>
-                        </div>
-
-                    </div>
-                    <div class="form-group row ">
-                        <label for="proficiencyRadioGruop" class="col-sm-2 col-form-label">Proficiency</label>
-                        <div class="col-sm-10  form-inline " id="proficiencyRadioGruop" [ngClass]="{'is-invalid' : skill.get('proficiency').invalid && skill.get('proficiency').touched  }">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input " formControlName="proficiency" type="radio" [id]="'beginner'+i" value="beginner">
-                                <label class="form-check-label" [attr.for]="'beginner'+i">Beginner</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" formControlName="proficiency" type="radio" [id]="'intermidiate'+i" value="intermidiate">
-                                <label class="form-check-label" [attr.for]="'intermidiate'+i">Intermidiate</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" formControlName="proficiency" type="radio" [id]="'advance'+i" value="advance">
-                                <label class="form-check-label" [attr.for]="'advance'+i">Advance </label>
-                            </div>
-                        </div>
-                        <span class="invalid-feedback offset-sm-2 pl-3" *ngIf="skill.get('proficiency').errors?.required || skill.get('proficiency').dirty">{{formError.proficiency}}</span>
-                    </div>
-                </div>
-            </div>
-
-
-
-
-
-            <div class="form-group row">
-                <div class="col-sm-10 offset-sm-2">
-                    <div class="row">
-                        <button type="submit" class="btn btn-success m-2 col-sm-4">Save</button>
-                        <button type="button" (click)='onLoadDataClick()' class="btn btn-primary m-2 col-sm-3">Load
-                            Data</button>
-                    </div>
-
-
-                </div>
-            </div>
-
-
-        </form>
+            <span class="invalid-feedback" *ngIf="formError.phone">{{
+            formError.phone
+          }}</span>
+        </div>
     </div>
 
+    <div class="form-group row">
+        <div class="col-sm-10 offset-sm-2">
+            <button type="button" (click)="addskillButtonClick()" [disabled]="employeeForm.get('skills').invalid" class="btn btn-primary">
+            Add Skill
+          </button>
+        </div>
+    </div>
+
+    <div formArrayName="skills" *ngFor="let skill of skillArray; let i = index">
+        <hr *ngIf="i > 0" />
+        <div [formGroupName]="i" class="col-sm-10 offset-sm-2" id="skill">
+            <div class="row pt-3">
+                <div class="col-10">
+                    <div class="form-group row">
+                        <label [attr.for]="'skillName' + i" class="col-sm-2 col-form-label">Skill</label
+                >
+
+                <div class="col-sm-3 mr-2">
+                  <input
+                    formControlName="skillName"
+                    [ngClass]="{
+                      'is-invalid':
+                        skill.get('skillName').invalid &&
+                        skill.get('skillName').touched
+                    }"
+                    type="text"
+                    class="form-control"
+                    [id]="'skillName' + i"
+                    placeholder="skillName"
+                    required
+                  />
+                  <span
+                    class="invalid-feedback"
+                    *ngIf="
+                      skill.get('skillName').errors?.required &&
+                      skill.get('skillName').touched
+                    "
+                  >
+                    Required skill name.</span
+                  >
+                </div>
+                <label
+                  [attr.for]="'exprienceInYears' + i"
+                  class="col-sm-2 col-form-label"
+                  >Experience</label
+                >
+                <div class="col-sm-3 mr-2">
+                  <input
+                    formControlName="exprienceInYears"
+                    [ngClass]="{
+                      'is-invalid':
+                        skill.get('exprienceInYears').invalid &&
+                        skill.get('exprienceInYears').touched
+                    }"
+                    type="text"
+                    class="form-control"
+                    [id]="'exprienceInYears' + i"
+                    placeholder="Exprience In Years"
+                    required
+                  />
+                  <span
+                    class="invalid-feedback"
+                    *ngIf="
+                      skill.get('exprienceInYears').errors?.required &&
+                      skill.get('exprienceInYears').touched
+                    "
+                    >Required Exprience.</span
+                  >
+                </div>
+              </div>
+              <div class="form-group row">
+                <label
+                  for="proficiencyRadioGruop"
+                  class="col-sm-2 col-form-label"
+                  >Proficiency</label
+                >
+                <div
+                  class="col-sm-10 form-inline"
+                  id="proficiencyRadioGruop"
+                  [ngClass]="{
+                    'is-invalid':
+                      skill.get('proficiency').invalid &&
+                      skill.get('proficiency').touched
+                  }"
+                >
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      formControlName="proficiency"
+                      type="radio"
+                      [id]="'beginner' + i"
+                      value="beginner"
+                    />
+                    <label class="form-check-label" [attr.for]="'beginner' + i"
+                      >Beginner</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      formControlName="proficiency"
+                      type="radio"
+                      [id]="'intermidiate' + i"
+                      value="intermidiate"
+                    />
+                    <label
+                      class="form-check-label"
+                      [attr.for]="'intermidiate' + i"
+                      >Intermidiate</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      formControlName="proficiency"
+                      type="radio"
+                      [id]="'advance' + i"
+                      value="advance"
+                    />
+                    <label class="form-check-label" [attr.for]="'advance' + i"
+                      >Advance
+                    </label>
+                    </div>
+                </div>
+                <span class="invalid-feedback offset-sm-2 pl-3" *ngIf="
+                    skill.get('proficiency').errors?.required ||
+                    skill.get('proficiency').dirty
+                  ">{{ formError.proficiency }}</span
+                >
+              </div>
+            </div>
+            <div class="col-2" *ngIf="skillArray.length > 1">
+              <button
+                class="btn btn-danger btn-sm float-right"
+                title="Delete Skill"
+                (click)="removeSkillButtonClick(i)"
+              >
+                X
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-10 offset-sm-2">
+          <div class="row">
+            <button type="submit" class="btn btn-success m-2 col-sm-4">
+              Save
+            </button>
+            <button
+              type="button"
+              (click)="onLoadDataClick()"
+              class="btn btn-primary m-2 col-sm-3"
+            >
+              Load Data
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
 <table class="table table-striped table-bordered mt-5 text-center">
-    <thead class="bg-secondary ">
-        <tr>
-            <th>FormGroup</th>
-            <th>FormControl(fullName)</th>
+  <thead class="bg-secondary">
+    <tr>
+      <th>FormGroup</th>
+      <th>FormControl(fullName)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        touched : {{ employeeForm.touched }} <br />
+        dirty : {{ employeeForm.dirty }} <br />
+        valid : {{ employeeForm.valid }} <br />
+        Form value : {{ employeeForm.value | json }}
+      </td>
 
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-                touched : {{employeeForm.touched}}
-                <br> dirty : {{employeeForm.dirty}}
-                <br> valid : {{employeeForm.valid}}
-                <br> Form value : {{employeeForm.value|json}}
-            </td>
-
-            <td>
-                touched : {{employeeForm.get("fullName").touched}}
-                <br> dirty : {{employeeForm.get("fullName").dirty}}
-                <br> valid : {{employeeForm.get("fullName").valid}}
-                <br> Form value : {{employeeForm.get("fullName").value}}
-            </td>
-        </tr>
-
-    </tbody>
+      <td>
+        touched : {{ employeeForm.get("fullName").touched }} <br />
+        dirty : {{ employeeForm.get("fullName").dirty }} <br />
+        valid : {{ employeeForm.get("fullName").valid }} <br />
+        Form value : {{ employeeForm.get("fullName").value }}
+      </td>
+    </tr>
+  </tbody>
 </table>

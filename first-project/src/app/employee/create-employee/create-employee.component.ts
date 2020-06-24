@@ -143,6 +143,9 @@ export class CreateEmployeeComponent implements OnInit {
       this.addSkillFormGroup()
     );
   }
+  removeSkillButtonClick(skillGroupIndex): void {
+    (this.employeeForm.get('skills') as FormArray).removeAt(skillGroupIndex);
+  }
 
   addSkillFormGroup(): FormGroup {
     return this.fb.group({
